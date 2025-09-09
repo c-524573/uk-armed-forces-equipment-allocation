@@ -24,17 +24,39 @@ if st.button('Calculate'):
     calculate_budget(aircraft_df, budget=budget)
     calculate_budget(rotor_df, budget=budget)
 
-    # Display Datasets
-    st.subheader('Vessels')
+    # Vessels
+    st.header('Vessels')
     st.dataframe(vessels_df)
 
-    st.subheader('Land Equipment')
+    st.bar_chart(pd.DataFrame(
+    {'Current Quantity': vessels_df['Current Quantity'].values,
+        'Max Quantity': vessels_df['Max Quantity'].values},
+    index=vessels_df['Fleet and Vessel type']), horizontal=True)
+
+    # Land Equipment
+    st.header('Land Equipment')
     st.dataframe(land_equipment_df)
 
-    st.subheader('Aircraft')
+    st.bar_chart(pd.DataFrame(
+    {'Current Quantity': land_equipment_df['Current Quantity'].values,
+        'Max Quantity': land_equipment_df['Max Quantity'].values},
+    index=land_equipment_df['Platform type and platform']), horizontal=True)
+
+    # Aircraft
+    st.header('Aircraft')
     st.dataframe(aircraft_df)
 
-    st.subheader('Helicopters')
+    st.bar_chart(pd.DataFrame(
+    {'Current Quantity': aircraft_df['Current Quantity'].values,
+        'Max Quantity': aircraft_df['Max Quantity'].values},
+    index=aircraft_df['Platform Type']), horizontal=True)
+
+    # Helicopters
+    st.header('Helicopters')
     st.dataframe(rotor_df)
 
-    st.bar_chart(pd.concat([vessels_df['Fleet and Vessel type'], vessels_df['Current Quantity']], axis=1), horizontal=True)
+    st.bar_chart(pd.DataFrame(
+        {'Current Quantity': rotor_df['Current Quantity'].values,
+         'Max Quantity': rotor_df['Max Quantity'].values},
+        index=rotor_df['Platform Type']), horizontal=True)
+    
