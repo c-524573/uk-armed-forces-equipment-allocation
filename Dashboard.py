@@ -1,10 +1,18 @@
 import streamlit as st
 import pandas as pd
 import math
+import re
+import copy
+from millify import millify
 
 def calculate_budget(dataframe, budget):
     dataframe['Purchasable'] = (budget / dataframe['Unit Cost']).apply(math.floor)
     dataframe['Max Quantity'] = dataframe['Current Quantity'] + dataframe['Purchasable']
+
+def format_dataframe(dataframe):
+    new_df = copy.copy(dataframe)
+    new_df['Unit Cost'] = new_df['Unit Cost'].apply(lambda x: millify(x, precision=2))
+    return new_df
 
 st.title('UK Armed Forces Equipment Allocation')
 
@@ -15,8 +23,18 @@ aircraft_df = pd.read_csv('Dataset/aircraft.csv')
 rotor_df = pd.read_csv('Dataset/rotor.csv')
 
 # Value input
-budget = st.number_input('Enter Budget:', value=4700000000)
+budget = st.text_input('Enter Budget:', value='4.7B').lower()
+
 if st.button('Calculate'):
+    if len(re.findall('^[0-9]+(?:\.[0-9]+)?[kmb]$', budget)) <= 0:
+        st.error('Error: Budget not in correct format, correct formats: 10k, 7.5m, or 31.45b')
+
+    if 'k' in budget:
+        budget = float(budget[:-1]) * 1000
+    elif 'm' in budget:
+        budget = float(budget[:-1]) * 1_000_000
+    elif 'b' in budget:
+        budget = float(budget[:-1]) * 1_000_000_000
 
     # Calculate Budget
     calculate_budget(vessels_df, budget=budget)
@@ -26,7 +44,10 @@ if st.button('Calculate'):
 
     # Vessels
     st.header('Vessels')
-    st.dataframe(vessels_df)
+
+
+    
+    st.dataframe(format_dataframe(vessels_df))
 
     st.bar_chart(pd.DataFrame(
     {'Current Quantity': vessels_df['Current Quantity'].values,
@@ -35,7 +56,7 @@ if st.button('Calculate'):
 
     # Land Equipment
     st.header('Land Equipment')
-    st.dataframe(land_equipment_df)
+    st.dataframe(format_dataframe(land_equipment_df))
 
     st.bar_chart(pd.DataFrame(
     {'Current Quantity': land_equipment_df['Current Quantity'].values,
@@ -44,7 +65,7 @@ if st.button('Calculate'):
 
     # Aircraft
     st.header('Aircraft')
-    st.dataframe(aircraft_df)
+    st.dataframe(format_dataframe(aircraft_df))
 
     st.bar_chart(pd.DataFrame(
     {'Current Quantity': aircraft_df['Current Quantity'].values,
@@ -53,10 +74,9 @@ if st.button('Calculate'):
 
     # Helicopters
     st.header('Helicopters')
-    st.dataframe(rotor_df)
+    st.dataframe(format_dataframe(rotor_df))
 
     st.bar_chart(pd.DataFrame(
         {'Current Quantity': rotor_df['Current Quantity'].values,
          'Max Quantity': rotor_df['Max Quantity'].values},
         index=rotor_df['Platform Type']), horizontal=True)
-    
