@@ -6,13 +6,13 @@ import copy
 from millify import millify
 
 def calculate_budget(dataframe, budget):
-    dataframe['Purchasable'] = (budget / dataframe['Unit Cost']).apply(math.floor)
-    dataframe['Max Quantity'] = dataframe['Current Quantity'] + dataframe['Purchasable']
+    dataframe['New Units'] = (budget / dataframe['Unit Cost']).apply(math.floor)
+    dataframe['Updated Units'] = dataframe['Current Units'] + dataframe['New Units']
 
 def format_dataframe(dataframe):
     new_df = copy.copy(dataframe)
     new_df['Unit Cost'] = new_df['Unit Cost'].apply(lambda x: millify(x, precision=2))
-    return new_df
+    return new_df.rename(columns={'Unit Cost': 'Unit Cost*'})
 
 st.title('UK Armed Forces Equipment Allocation')
 
@@ -44,14 +44,11 @@ if st.button('Calculate'):
 
     # Vessels
     st.header('Vessels')
-
-
-    
     st.dataframe(format_dataframe(vessels_df))
 
     st.bar_chart(pd.DataFrame(
-    {'Current Quantity': vessels_df['Current Quantity'].values,
-        'Max Quantity': vessels_df['Max Quantity'].values},
+    {'Current Units': vessels_df['Current Units'].values,
+        'New Units': vessels_df['New Units'].values},
     index=vessels_df['Fleet and Vessel type']), horizontal=True)
 
     # Land Equipment
@@ -59,8 +56,8 @@ if st.button('Calculate'):
     st.dataframe(format_dataframe(land_equipment_df))
 
     st.bar_chart(pd.DataFrame(
-    {'Current Quantity': land_equipment_df['Current Quantity'].values,
-        'Max Quantity': land_equipment_df['Max Quantity'].values},
+    {'Current Units': land_equipment_df['Current Units'].values,
+        'New Units': land_equipment_df['New Units'].values},
     index=land_equipment_df['Platform type and platform']), horizontal=True)
 
     # Aircraft
@@ -68,8 +65,8 @@ if st.button('Calculate'):
     st.dataframe(format_dataframe(aircraft_df))
 
     st.bar_chart(pd.DataFrame(
-    {'Current Quantity': aircraft_df['Current Quantity'].values,
-        'Max Quantity': aircraft_df['Max Quantity'].values},
+    {'Current Units': aircraft_df['Current Units'].values,
+        'New Units': aircraft_df['New Units'].values},
     index=aircraft_df['Platform Type']), horizontal=True)
 
     # Helicopters
@@ -77,6 +74,8 @@ if st.button('Calculate'):
     st.dataframe(format_dataframe(rotor_df))
 
     st.bar_chart(pd.DataFrame(
-        {'Current Quantity': rotor_df['Current Quantity'].values,
-         'Max Quantity': rotor_df['Max Quantity'].values},
+        {'Current Units': rotor_df['Current Units'].values,
+         'New Units': rotor_df['New Units'].values},
         index=rotor_df['Platform Type']), horizontal=True)
+    
+    st.markdown('*\* Unit Cost is calculated from open source data so may be inaccurate.*')
