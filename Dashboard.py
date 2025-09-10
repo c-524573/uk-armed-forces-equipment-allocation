@@ -91,6 +91,7 @@ if st.button('Calculate'):
         'New Units': vessels_df['New Units'].values},
     index=vessels_df['Fleet and Vessel type']), horizontal=True)
 
+    st.subheader('Historical (2016) vs Current (2024) Equipment')
     st.plotly_chart(dumbbell_chart(vessels_df, equipment_title='Fleet and Vessel type'), use_container_width=True)
 
     # Land Equipment
@@ -102,6 +103,7 @@ if st.button('Calculate'):
         'New Units': land_equipment_df['New Units'].values},
     index=land_equipment_df['Platform type and platform']), horizontal=True)
 
+    st.subheader('Historical (2016) vs Current (2024) Equipment')
     st.plotly_chart(dumbbell_chart(land_equipment_df, equipment_title='Platform type and platform'), use_container_width=True)
 
     # Aircraft
@@ -113,6 +115,7 @@ if st.button('Calculate'):
         'New Units': aircraft_df['New Units'].values},
     index=aircraft_df['Platform Type']), horizontal=True)
 
+    st.subheader('Historical (2016) vs Current (2024) Equipment')
     st.plotly_chart(dumbbell_chart(aircraft_df, equipment_title='Platform Type'), use_container_width=True)
 
     # Helicopters
@@ -124,6 +127,7 @@ if st.button('Calculate'):
          'New Units': rotor_df['New Units'].values},
         index=rotor_df['Platform Type']), horizontal=True)
     
+    st.subheader('Historical (2016) vs Current (2024) Equipment')
     st.plotly_chart(dumbbell_chart(rotor_df, equipment_title='Platform Type'), use_container_width=True)
     
     st.markdown('*\* Unit Cost is calculated from open source data so may be inaccurate.*')
