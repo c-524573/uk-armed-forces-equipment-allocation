@@ -20,10 +20,6 @@ def format_dataframe(dataframe):
                                   'Historical Units': 'Historical Units (2016)'})
 
 def dumbbell_chart(dataframe, equipment_title):
-    equipment = dataframe[equipment_title]
-    historical = dataframe['Historical Units']
-    current = dataframe['Current Units']
-
     fig = go.Figure()
 
     for _, row in dataframe.iterrows():
@@ -52,7 +48,6 @@ def dumbbell_chart(dataframe, equipment_title):
     ))
 
     return fig
-
 
 st.title('UK Armed Forces Equipment Allocation')
 
