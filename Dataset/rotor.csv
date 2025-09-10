@@ -1,8 +1,8 @@
-Platform Type,Unit Cost,Current Units,New Units,Updated Units
-     Apache AH-64E,35860000.0,38,,
-     Chinook,100000000.0,54,,
-     Merlin HM2 [Note 12],19000000.0,30,,
-     Merlin Mk3/3a/4/4a/iMk3,32280544.0,25,,
-     Puma,18000000.0,20,,
-     Wildcat AH Mk1,24834864.0,34,,
-     Wildcat HMA Mk2 [Note 12],24500000.0,28,,
+Platform Type,Unit Cost,Historical Units,Current Units,New Units,Updated Units
+     Apache AH-64E,35860000.0,0,38,,
+     Chinook,100000000.0,60,54,,
+     Merlin HM2 [Note 12],19000000.0,30,30,,
+     Merlin Mk3/3a/4/4a/iMk3,32280544.0,25,25,,
+     Puma,18000000.0,23,20,,
+     Wildcat AH Mk1,24834864.0,34,34,,
+     Wildcat HMA Mk2 [Note 12],24500000.0,21,28,,

@@ -1,7 +1,7 @@
-Fleet and Vessel type,Unit Cost,Current Units,New Units,Updated Units
-     Ballistic Nuclear Submarine,9710000000.0,4,,
-     Nuclear Submarine,5710000000.0,6,,
-     Aircraft Carriers,4500000000.0,2,,
-     Landing Platform Docks/Helicopters,225000000.0,2,,
-     Destroyers,1050000000.0,6,,
-     Frigates,1400000000.0,11,,
+Fleet and Vessel type,Unit Cost,Historical Units,Current Units,New Units,Updated Units
+     Ballistic Nuclear Submarine,9710000000.0,4,4,,
+     Nuclear Submarine,5710000000.0,7,6,,
+     Aircraft Carriers,4500000000.0,0,2,,
+     Landing Platform Docks/Helicopters,225000000.0,3,2,,
+     Destroyers,1050000000.0,6,6,,
+     Frigates,1400000000.0,13,11,,
