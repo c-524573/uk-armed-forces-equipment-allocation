@@ -2,7 +2,7 @@
 
 A tool developed to aid decision makers in understanding the equipment options currently available.
 
-**Link to Dashboard (Streamlit):** https://uk-armed-forces-equipment-allocation-t2mmso8afyop6xpqtwnwno.streamlit.app/
+**Link to Dashboard (Streamlit):** https://uk-armed-forces-equipment-allocation-t2mmso8afyop6xpqtwnwno.streamlit.app/ (may take a minute to open)
 
 ## File Structure
 
